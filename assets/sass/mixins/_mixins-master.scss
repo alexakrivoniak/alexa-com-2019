@@ -1,0 +1,372 @@
+// Rem output with px fallback
+@mixin font-size($sizeValue: 1) {
+	font-size: ($sizeValue * 16) * 1px;
+	font-size: $sizeValue * 1rem;
+}
+
+@font-face {
+    font-family: 'Windsong';
+    src: url('assets/fonts/windsong-webfont.woff2') format('woff2'),
+         url('assets/fonts/windsong-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+// Center block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// Clearfix
+@mixin clearfix() {
+	content: "";
+	display: table;
+	table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+//Colors
+$primary-color: #9068be;
+$secondary-color: #6ed3cf;
+$tertiary-color: #e62739;
+$off-white: #e1e8f0;
+$grey: #404040;
+$yellow: #e6cf8b;
+
+/*$primary-color: #22264b;
+$secondary-color: #b56969;
+$tertiary-color: #e6cf8b;
+$off-white: #e8edf3;
+$grey: #404040;*/
+
+.body {
+
+}
+
+
+//Types and fonts
+@font-face {
+    font-family: 'Icons';
+    src: url( 'assets/fonts/fontawesome-webfont.eot'),
+        url( 'assets/fonts/fontawesome-webfont.woff') format('woff'),
+         url('assets/fonts/fontawesome-webfont.ttf') format('truetype'),
+         url( 'assets/fonts/fontawesome-webfont.svg#fontawesome-webfont' ) format('svg');
+    font-weight:normal;
+    font-style:normal;
+}
+
+%arial-black {
+  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+}
+
+%courier {
+  font-family: 'Courier', 'Courier New', 'Georgia', 'Times', 'Times New Roman';
+}
+
+%main-font {
+  font-family: 'Arial Regular', 'Arial', sans-serif;
+  font-size: 17px;
+}
+
+%link-font {
+
+}
+
+@mixin basic-input {
+
+}
+
+@mixin main-btn {
+  background-color: transparent;
+  border: 3px solid black;
+  padding: 0.3em 0.2em;
+  color: black !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-weight: 800;
+  box-sizing: border-box;
+  position: relative;
+  @include transition( all, ease-in-out, 0.6s );  
+  &:before {
+    content: "";
+    left: 0;
+    margin:0;
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    @include transition( all, ease-in-out, 0.6s );  
+  }
+  &:hover {
+    background: $primary-color none repeat scroll 0 0;
+    border-color: $primary-color;
+    color: white !important;
+    &:before {
+      background: $tertiary-color none repeat scroll 0 0 !important;
+      margin: -1em 0 0 -1em;
+    }
+  }
+}
+
+@mixin base-general-styles {
+  & img {
+    max-width: 100%;
+  }
+  & iframe {
+    @include respond-to(medium-small-screens) {
+      width: 100%;
+    }
+  }
+  & hr {
+    background-color: rgba(0,0,0,0.2);
+    height: 1px;
+    border: none;
+    width: 90%;
+    margin: 0 auto;
+  }
+  & h1 {
+    font-size: 44px;
+    padding-bottom: 0.3em;
+    letter-spacing: 0.5px;
+    margin: 10px 0;
+    line-height: 42px;
+  }
+  & h2 {
+    font-size: 34px;
+    padding-bottom: 0.3em;
+    margin: 10px 0;
+    text-transform: uppercase;
+    line-height: 32px;
+
+  }
+  & h3 {
+    font-size: 35px;
+    padding-bottom: 0.3em;
+    letter-spacing: 0.5px;
+    padding: 20px 0 10px;
+    line-height: 32px;
+
+  }
+  & h4 {
+    font-size: 18px;
+    padding-bottom: 0.3em;
+    letter-spacing: 0.5px;
+    padding: 10px 0 3px;
+    line-height: 16px;
+  }
+  & h5 {
+    font-size: 14px;
+    padding-bottom: 0.3em;
+    letter-spacing: 0.5px;
+    padding: 10px 0 5px;
+    line-height: 14px;
+  }
+  & h6 {
+    font-size: 14px;
+    padding-bottom: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 10px 0;
+    line-height: 14px;
+  }
+  & ol {
+    margin-left: 50px;
+    counter-reset: item;
+    @include respond-to (medium-small-screens) {
+      margin-left: 3px;
+    }
+    & > li {
+      display: block;
+      padding: 0.4em 0;
+      margin-left: 20px;
+      &:before {
+        content: counter(item) ". ";
+        counter-increment: item;
+      }
+    }
+  }
+  & ul {
+    list-style: none;
+    margin-left: 50px;
+    margin:10px 0;
+    @include respond-to (medium-small-screens) {
+      margin-left: 3px;
+    }
+    & > li {
+      padding: 0.2em 0 0.2em 1em;
+      position: relative;
+      margin-left: 20px;
+      &:before {
+        content: "\f111";
+        font-family: 'Icons';
+        position: absolute;
+        left: 0;
+        top:0.4em;
+        font-size: 6px !important;
+      }
+      & > ul {
+        list-style: none;
+        padding:0;
+        margin:0;
+        & > li {
+          padding: 0.2em 0 0.2em 1em;
+          position: relative;
+          margin-left: 10px;
+          &:before {
+            content: "\f1db";
+            font-size: 0.4em;
+            position: absolute;
+            left: 0;
+            top:1.2em;
+            font-family: 'Icons';
+          }
+        }
+      }
+    }
+  }
+  & p {
+    padding: 0.5em 0;
+    & a {
+      @include regular-link;
+    }
+  }
+  & a {
+    @include regular-link;
+  }
+  & img {
+    max-width: 100%;
+  }
+}
+
+// Framework
+@mixin transition( $val, $ease, $time ) {
+  -webkit-transition: $val $ease $time;
+  -moz-transition: $val $ease $time;
+  -o-transition: $val $ease $time;
+  -ms-transition: $val $ease $time;
+  transition: $val $ease $time;
+}
+// CSS Animation Mixins
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+   @include transform(scale($scale));
+}
+// translate
+@mixin translate ($x, $y) {
+   @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin ($origin) {
+    moz-transform-origin: $origin;
+    -o-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+    -webkit-transform-origin: $origin;
+    transform-origin: $origin;
+}
+//text-shadow
+@mixin text-shadow( $top: 3px, $left: 3px, $blur: 3px , $colour: #333 ) {
+  -webkit-text-shadow:$top $left $blur $colour;
+  -moz-text-shadow:$top $left $blur $colour;
+  -o-text-shadow:$top $left $blur $colour;
+  text-shadow:$top $left $blur $colour;
+}
+//box-shadow
+@mixin box-shadow($top, $left, $blur, $colour, $inset: "") {
+  -webkit-box-shadow: #{$inset} $top $left $blur $colour;
+  -moz-box-shadow:  #{$inset} $top $left $blur $colour;
+  box-shadow: #{$inset} $top $left $blur $colour;
+}
+//rounded-corners
+@mixin rounded-corners($tl, $tr, $br, $bl) {
+  -webkit-border-radius:$tl $tr $br $bl;
+  -moz-border-radius:$tl $tr $br $bl;
+  -o-border-radius:$tl $tr $br $bl;
+  border-radius:$tl $tr $br $bl;
+}
+// font-family
+@mixin font ( $name, $src, $hash ) {
+  @font-face {
+    font-family: $name;
+    src: url( $src + '.eot');
+    src: url( $src + '.eot?#iefix') format('embedded-opentype'),
+         url( $src + '.woff') format('woff'),
+         url( $src + '.ttf') format('truetype'),
+         url( $src + '.svg#' + $hash ) format('svg');
+    font-weight:normal;
+    font-style:normal;
+  }
+}
+
+
+// Breakpoints (Media Queries)
+$break-small: 480px;
+$break-medium: 990px;
+$break-medium-small: 950px;
+$break-large: 1100px;
+$break-extra-large:1200px;
+
+$break-extra-extra-large: 1500px;
+$break-extra-extra-large: 1900px;
+
+// Options are 'handhelds', 'medium-screens', 'medium-wide-screens', 'wide-screens'
+@mixin respond-to($media) {
+  @if $media == small-screens {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-small-screens {
+   @media only screen and (max-width: $break-medium-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-medium - 1) { @content; }
+  }
+  @else if $media == medium-wide-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (max-width: $break-large) { @content; }
+  }
+  @else if $media == extra-wide-screens {
+    @media only screen and (max-width: $break-extra-large) { @content; }
+  }
+}
+
+@mixin regular-link {
+  color: $tertiary-color !important;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  @include transition( all, ease-in-out, 0.4s ); 
+  &:hover {
+    color: darken($tertiary-color, 10%) !important;
+  }
+}
+
+a {
+  @include regular-link;
+}
